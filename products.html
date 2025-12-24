@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Apex Vending Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #0a0a0a;
+            --secondary-bg: #151515;
+            --accent-blue: #00d4ff;
+            --accent-cyan: #0ff;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --gradient-1: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            --gradient-2: linear-gradient(135deg, #00d4ff 0%, #0ff 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            position: relative;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .logo-apex {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-tagline {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.5rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            letter-spacing: 2.8px;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-2);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .mobile-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--accent-cyan);
+            transition: all 0.3s ease;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 10rem 2rem 6rem;
+            background: var(--gradient-1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(0, 255, 255, 0.1) 0%, transparent 50%);
+        }
+
+        .page-header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: 6rem 2rem;
+            background: var(--secondary-bg);
+        }
+
+        .products-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-intro {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-intro h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
+        }
+
+        .section-intro p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Product Carousel */
+        .product-carousel-wrapper {
+            margin-bottom: 6rem;
+        }
+
+        .product-carousel {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .carousel-slides {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4/3;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            padding: 2rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            color: var(--accent-cyan);
+            text-align: center;
+        }
+
+        /* Carousel Controls */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 212, 255, 0.2);
+            border: 1px solid rgba(0, 212, 255, 0.5);
+            color: var(--accent-cyan);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-arrow:hover {
+            background: rgba(0, 212, 255, 0.6);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .carousel-arrow.prev {
+            left: 20px;
+        }
+
+        .carousel-arrow.next {
+            right: 20px;
+        }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 10;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(0, 212, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
+            transform: scale(1.2);
+        }
+
+        /* How It Works */
+        .how-it-works {
+            margin-bottom: 6rem;
+        }
+
+        .how-it-works h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            text-align: center;
+            color: var(--accent-cyan);
+            margin-bottom: 3rem;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.2);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            background: var(--gradient-2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--primary-bg);
+        }
+
+        .step-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .step-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Product Categories */
+        .product-categories {
+            margin-bottom: 6rem;
+        }
+
+        .product-categories h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            text-align: center;
+            color: var(--accent-cyan);
+            margin-bottom: 3rem;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .category-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .category-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-item h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: 0.8rem;
+        }
+
+        .category-item p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Products CTA */
+        .products-cta {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 20px;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .products-cta h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
+        }
+
+        .products-cta p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--gradient-2);
+            color: var(--primary-bg);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(0, 212, 255, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-bg);
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                flex-direction: column;
+                background: rgba(10, 10, 10, 0.98);
+                width: 100%;
+                padding: 2rem;
+                gap: 1.5rem;
+                transition: left 0.3s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .info-banner {
+                padding: 2rem;
+            }
+        }
+
+        /* Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#0ff;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <!-- Geometric A shape -->
+                    <path d="M50 10 L80 90 L65 90 L60 75 L40 75 L35 90 L20 90 Z M45 60 L55 60 L50 35 Z" 
+                          fill="url(#logoGradient)" opacity="0.9"/>
+                    <!-- Tech accent lines -->
+                    <line x1="50" y1="10" x2="50" y2="5" stroke="url(#logoGradient)" stroke-width="3" stroke-linecap="round"/>
+                    <line x1="35" y1="25" x2="30" y2="20" stroke="url(#logoGradient)" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="65" y1="25" x2="70" y2="20" stroke="url(#logoGradient)" stroke-width="2" stroke-linecap="round"/>
+                    <!-- Glowing circle accent -->
+                    <circle cx="50" cy="50" r="35" fill="none" stroke="url(#logoGradient)" stroke-width="1" opacity="0.3"/>
+                </svg>
+                <div class="logo-text">
+                    <span class="logo-apex">APEX</span>
+                    <span class="logo-tagline">Vending Solutions</span>
+                </div>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html" class="active">Products</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+            <div class="mobile-toggle" id="mobileToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Our Products</h1>
+        <p>Diverse selections tailored to your unique needs</p>
+    </section>
+
+    <!-- Products Carousel Section -->
+    <section class="products-section">
+        <div class="products-container">
+            <div class="section-intro fade-in">
+                <h2>What We Offer</h2>
+                <p>From classic favorites to healthy alternatives, premium snacks to grab-and-go meals—we stock what your people actually want.</p>
+            </div>
+
+            <!-- Product Image Carousel -->
+            <div class="product-carousel-wrapper fade-in">
+                <div class="product-carousel">
+                    <div class="carousel-slides">
+                        <div class="carousel-slide active">
+                            <img src="https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=800&h=600&fit=crop" alt="M&Ms and Candy Selection">
+                            <div class="carousel-caption">Classic Favorites</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://images.unsplash.com/photo-1628191010210-a59de3e072f6?w=800&h=600&fit=crop" alt="Healthy Granola Bars">
+                            <div class="carousel-caption">Healthy Snacks</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://images.unsplash.com/photo-1625772452859-1c03d5bf1137?w=800&h=600&fit=crop" alt="Bottled Water and Drinks">
+                            <div class="carousel-caption">Hydration Options</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&h=600&fit=crop" alt="Fresh Sandwiches">
+                            <div class="carousel-caption">Fresh Meals</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=800&h=600&fit=crop" alt="Chips and Savory Snacks">
+                            <div class="carousel-caption">Savory Snacks</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://images.unsplash.com/photo-1608855748549-d3c6b3cd6c3a?w=800&h=600&fit=crop" alt="Energy Drinks and Sodas">
+                            <div class="carousel-caption">Energy & Refreshment</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation Arrows -->
+                    <div class="carousel-arrow prev" onclick="changeProductSlide(-1)">‹</div>
+                    <div class="carousel-arrow next" onclick="changeProductSlide(1)">›</div>
+                    
+                    <!-- Navigation Dots -->
+                    <div class="carousel-dots">
+                        <div class="carousel-dot active" onclick="goToProductSlide(0)"></div>
+                        <div class="carousel-dot" onclick="goToProductSlide(1)"></div>
+                        <div class="carousel-dot" onclick="goToProductSlide(2)"></div>
+                        <div class="carousel-dot" onclick="goToProductSlide(3)"></div>
+                        <div class="carousel-dot" onclick="goToProductSlide(4)"></div>
+                        <div class="carousel-dot" onclick="goToProductSlide(5)"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How It Works Section -->
+            <div class="how-it-works fade-in">
+                <h2>How We Customize Your Selection</h2>
+                
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3>We Start With a Curated List</h3>
+                        <p>We come prepared with a thoughtfully curated product mix based on industry insights and proven favorites. This gives you a solid starting point without any guesswork.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3>We Listen to Your Needs</h3>
+                        <p>Every organization is unique. We work with you to understand dietary restrictions, taste preferences, budget considerations, and any specific requirements.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3>We Tailor the Mix</h3>
+                        <p>Based on your feedback, we adjust the product selection to perfectly match the needs of your audience. More healthy options? Done. Specific brands? No problem. Allergen-free? We've got you covered.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Categories -->
+            <div class="product-categories fade-in">
+                <h2>Product Categories We Offer</h2>
+                
+                <div class="categories-grid">
+                    <div class="category-item">
+                        <div class="category-icon">🍫</div>
+                        <h3>Classic Snacks</h3>
+                        <p>M&Ms, Snickers, Doritos, Cheetos, Pringles, and all the favorites</p>
+                    </div>
+
+                    <div class="category-item">
+                        <div class="category-icon">🥗</div>
+                        <h3>Healthy Options</h3>
+                        <p>Granola bars, trail mix, dried fruit, protein bars, veggie chips</p>
+                    </div>
+
+                    <div class="category-item">
+                        <div class="category-icon">🥤</div>
+                        <h3>Beverages</h3>
+                        <p>Water, Coke, Pepsi, vitamin water, coconut water, energy drinks</p>
+                    </div>
+
+                    <div class="category-item">
+                        <div class="category-icon">🍜</div>
+                        <h3>Quick Meals</h3>
+                        <p>Ramen, Cup Noodles, instant soups, and ready-to-eat options</p>
+                    </div>
+
+                    <div class="category-item">
+                        <div class="category-icon">🥪</div>
+                        <h3>Fresh Food</h3>
+                        <p>Sandwiches, wraps, salads, and other grab-and-go meals</p>
+                    </div>
+
+                    <div class="category-item">
+                        <div class="category-icon">☕</div>
+                        <h3>Coffee & Tea</h3>
+                        <p>Hot beverages, iced coffee, specialty drinks, and more</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="products-cta fade-in">
+                <h2>Ready to Build Your Perfect Product Mix?</h2>
+                <p>Let's discuss what your organization needs. We'll make the process easy and ensure everyone is happy with the selection.</p>
+                <a href="contact.html" class="cta-button">Let's Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">APEX VENDING SOLUTIONS</div>
+            <p style="color: var(--text-secondary); margin-top: 1rem;">Smart vending for modern spaces</p>
+            <p class="footer-text">&copy; 2024 Apex Vending Solutions. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Product Carousel
+        let currentProductSlide = 0;
+        const productSlides = document.querySelectorAll('.product-carousel .carousel-slide');
+        const productDots = document.querySelectorAll('.product-carousel .carousel-dot');
+        let productAutoplayInterval;
+
+        function showProductSlide(n) {
+            if (n >= productSlides.length) currentProductSlide = 0;
+            if (n < 0) currentProductSlide = productSlides.length - 1;
+            
+            productSlides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                productDots[index].classList.remove('active');
+            });
+            
+            productSlides[currentProductSlide].classList.add('active');
+            productDots[currentProductSlide].classList.add('active');
+        }
+
+        function changeProductSlide(direction) {
+            currentProductSlide += direction;
+            showProductSlide(currentProductSlide);
+            resetProductAutoplay();
+        }
+
+        function goToProductSlide(n) {
+            currentProductSlide = n;
+            showProductSlide(currentProductSlide);
+            resetProductAutoplay();
+        }
+
+        function nextProductSlide() {
+            currentProductSlide++;
+            showProductSlide(currentProductSlide);
+        }
+
+        function startProductAutoplay() {
+            productAutoplayInterval = setInterval(nextProductSlide, 4000);
+        }
+
+        function resetProductAutoplay() {
+            clearInterval(productAutoplayInterval);
+            startProductAutoplay();
+        }
+
+        // Start autoplay
+        if (productSlides.length > 0) {
+            startProductAutoplay();
+
+            // Pause on hover
+            const productCarousel = document.querySelector('.product-carousel');
+            if (productCarousel) {
+                productCarousel.addEventListener('mouseenter', () => {
+                    clearInterval(productAutoplayInterval);
+                });
+                
+                productCarousel.addEventListener('mouseleave', () => {
+                    startProductAutoplay();
+                });
+            }
+        }
+    </script>
+</body>
+</html>
