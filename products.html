@@ -219,119 +219,6 @@
             font-size: 1.1rem;
         }
 
-        /* Product Carousel */
-        .product-carousel-wrapper {
-            margin-bottom: 6rem;
-        }
-
-        .product-carousel {
-            position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
-        }
-
-        .carousel-slides {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 4/3;
-        }
-
-        .carousel-slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-        }
-
-        .carousel-slide.active {
-            opacity: 1;
-        }
-
-        .carousel-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .carousel-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
-            padding: 2rem;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.5rem;
-            color: var(--accent-cyan);
-            text-align: center;
-        }
-
-        /* Carousel Controls */
-        .carousel-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 212, 255, 0.2);
-            border: 1px solid rgba(0, 212, 255, 0.5);
-            color: var(--accent-cyan);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            cursor: pointer;
-            z-index: 10;
-            transition: all 0.3s ease;
-        }
-
-        .carousel-arrow:hover {
-            background: rgba(0, 212, 255, 0.6);
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
-        }
-
-        .carousel-arrow.prev {
-            left: 20px;
-        }
-
-        .carousel-arrow.next {
-            right: 20px;
-        }
-
-        .carousel-dots {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 1rem;
-            z-index: 10;
-        }
-
-        .carousel-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            border: 2px solid rgba(0, 212, 255, 0.5);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .carousel-dot.active {
-            background: var(--accent-cyan);
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
-            transform: scale(1.2);
-        }
-
         /* How It Works */
         .how-it-works {
             margin-bottom: 6rem;
@@ -620,52 +507,6 @@
                 <p>From classic favorites to healthy alternatives, premium snacks to grab-and-go meals—we stock what your people actually want.</p>
             </div>
 
-            <!-- Product Image Carousel -->
-            <div class="product-carousel-wrapper fade-in">
-                <div class="product-carousel">
-                    <div class="carousel-slides">
-                        <div class="carousel-slide active">
-                            <img src="https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=800&h=600&fit=crop&q=80" alt="Candy and Chocolate Selection">
-                            <div class="carousel-caption">Classic Favorites</div>
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="https://images.unsplash.com/photo-1560944527-3e5d3b6e8b7d?w=800&h=600&fit=crop&q=80" alt="Healthy Granola Bars and Snacks">
-                            <div class="carousel-caption">Healthy Snacks</div>
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="https://images.unsplash.com/photo-1603833797131-3c0a84c3c88c?w=800&h=600&fit=crop&q=80" alt="Bottled Water and Beverages">
-                            <div class="carousel-caption">Hydration Options</div>
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="https://images.unsplash.com/photo-1619221882458-b8f85c2e7d6e?w=800&h=600&fit=crop&q=80" alt="Fresh Sandwiches and Wraps">
-                            <div class="carousel-caption">Fresh Meals</div>
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="https://images.unsplash.com/photo-1566478989037-eec170784d0b?w=800&h=600&fit=crop&q=80" alt="Chips and Savory Snacks">
-                            <div class="carousel-caption">Savory Snacks</div>
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="https://images.unsplash.com/photo-1624517452488-04869289c4ca?w=800&h=600&fit=crop&q=80" alt="Energy Drinks and Sodas">
-                            <div class="carousel-caption">Energy & Refreshment</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Navigation Arrows -->
-                    <div class="carousel-arrow prev" onclick="changeProductSlide(-1)">‹</div>
-                    <div class="carousel-arrow next" onclick="changeProductSlide(1)">›</div>
-                    
-                    <!-- Navigation Dots -->
-                    <div class="carousel-dots">
-                        <div class="carousel-dot active" onclick="goToProductSlide(0)"></div>
-                        <div class="carousel-dot" onclick="goToProductSlide(1)"></div>
-                        <div class="carousel-dot" onclick="goToProductSlide(2)"></div>
-                        <div class="carousel-dot" onclick="goToProductSlide(3)"></div>
-                        <div class="carousel-dot" onclick="goToProductSlide(4)"></div>
-                        <div class="carousel-dot" onclick="goToProductSlide(5)"></div>
-                    </div>
-                </div>
-            </div>
-
             <!-- How It Works Section -->
             <div class="how-it-works fade-in">
                 <h2>How We Customize Your Selection</h2>
@@ -748,7 +589,7 @@
         <div class="footer-content">
             <div class="footer-logo">APEX VENDING SOLUTIONS</div>
             <p style="color: var(--text-secondary); margin-top: 1rem;">Smart vending for modern spaces</p>
-            <p class="footer-text">&copy; 20245 Apex Vending Solutions. All rights reserved.</p>
+            <p class="footer-text">&copy; 2025 Apex Vending Solutions. All rights reserved.</p>
         </div>
     </footer>
 
@@ -776,68 +617,6 @@
         }, observerOptions);
 
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-        // Product Carousel
-        let currentProductSlide = 0;
-        const productSlides = document.querySelectorAll('.product-carousel .carousel-slide');
-        const productDots = document.querySelectorAll('.product-carousel .carousel-dot');
-        let productAutoplayInterval;
-
-        function showProductSlide(n) {
-            if (n >= productSlides.length) currentProductSlide = 0;
-            if (n < 0) currentProductSlide = productSlides.length - 1;
-            
-            productSlides.forEach((slide, index) => {
-                slide.classList.remove('active');
-                productDots[index].classList.remove('active');
-            });
-            
-            productSlides[currentProductSlide].classList.add('active');
-            productDots[currentProductSlide].classList.add('active');
-        }
-
-        function changeProductSlide(direction) {
-            currentProductSlide += direction;
-            showProductSlide(currentProductSlide);
-            resetProductAutoplay();
-        }
-
-        function goToProductSlide(n) {
-            currentProductSlide = n;
-            showProductSlide(currentProductSlide);
-            resetProductAutoplay();
-        }
-
-        function nextProductSlide() {
-            currentProductSlide++;
-            showProductSlide(currentProductSlide);
-        }
-
-        function startProductAutoplay() {
-            productAutoplayInterval = setInterval(nextProductSlide, 4000);
-        }
-
-        function resetProductAutoplay() {
-            clearInterval(productAutoplayInterval);
-            startProductAutoplay();
-        }
-
-        // Start autoplay
-        if (productSlides.length > 0) {
-            startProductAutoplay();
-
-            // Pause on hover
-            const productCarousel = document.querySelector('.product-carousel');
-            if (productCarousel) {
-                productCarousel.addEventListener('mouseenter', () => {
-                    clearInterval(productAutoplayInterval);
-                });
-                
-                productCarousel.addEventListener('mouseleave', () => {
-                    startProductAutoplay();
-                });
-            }
-        }
     </script>
 </body>
 </html>
